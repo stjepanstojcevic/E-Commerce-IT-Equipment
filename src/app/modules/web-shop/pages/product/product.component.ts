@@ -63,8 +63,6 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   public addProduct() {
-    console.log("ProductCardComponent");
-    
     this.orderService.addProduct(this.product);
   }
 }

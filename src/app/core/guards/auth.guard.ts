@@ -15,12 +15,8 @@ export class AuthGuard implements CanActivate {
         private router: Router,
         private authService: AuthService,
     ) {
-        this.authService.role$
-        .pipe(tap(x => console.log("guard", x)))
-        .subscribe(role => this.role = role);
-        this.authService.isAuthenticated$
-        .pipe(tap(x => console.log("guard", x)))
-        .subscribe(loggedIn => this.isAuthenticated = loggedIn);
+        this.authService.role$.subscribe(role => this.role = role);
+        this.authService.isAuthenticated$.subscribe(loggedIn => this.isAuthenticated = loggedIn);
     }
 
     canActivate(): boolean {

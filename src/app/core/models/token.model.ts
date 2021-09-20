@@ -14,8 +14,6 @@ export class Token {
 
     static Create(): Token {
         var token = window.localStorage["ecommerce-user-id-token"];
-        console.log("Token: ", token);
-        
         return new Token(token);
     }
 

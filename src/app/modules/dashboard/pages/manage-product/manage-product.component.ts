@@ -134,7 +134,6 @@ export class ManageProductComponent implements OnInit, OnDestroy{
   public createOrUpdateProduct() {
     this.shopService.createOrUpdateProduct(this.editMode, this.productForm.value, this.productId)
     .pipe(
-      tap(x => console.log("product response", x)),
       takeUntil(this.unsubscribe$),
       tap(() => this.uploadImageInput.nativeElement.value = ""),
       // map(res => res.data._id),

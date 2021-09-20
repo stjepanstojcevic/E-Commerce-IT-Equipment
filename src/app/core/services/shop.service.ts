@@ -50,7 +50,6 @@ export class ShopService {
   public fetch(): Observable<boolean> {
     return this.findProducts()
       .pipe(
-        // tap(res => console.log("shop.service.fetch", res)),
         map(res => res.data),
         tap(products => this.products$.next(products as Product[])),
         map(x => !!x)
@@ -58,7 +57,7 @@ export class ShopService {
   }
 
   public getCategories(): Observable<string[]> {
-    return this.apiService.get('/products/categories').pipe(map(res => res.data), tap(x => console.log(x)));
+    return this.apiService.get('/products/categories').pipe(map(res => res.data));
   }
 
   public filterByCategory(category: string) {

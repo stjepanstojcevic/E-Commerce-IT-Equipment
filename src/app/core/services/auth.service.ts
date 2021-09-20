@@ -25,16 +25,6 @@ export class AuthService {
 
   constructor(private apiService: ApiService) { }
   
-  private handleError(error: HttpErrorResponse) {
-    console.log(error);
-    //alert(`${error.status} ${error.message}`);
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
-    } return throwError('Something bad happened; please try again later.');
-  };
-
   register(credentials: LoginContext): Observable<boolean> {
     return this.apiService.post('/account/register', credentials)
       .pipe(
@@ -76,7 +66,6 @@ export class AuthService {
           tap(
             user => this.user$.next(user),
             error => this.handleErrorFetch(error),
-            () => console.log("isLoggedIn completed")
           ),
           map(x => !!x)
         );
