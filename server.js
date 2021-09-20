@@ -27,7 +27,7 @@ app.use(express.static('./dist/angular-startup'));
 
 
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, './dist/angular-startup')});
+  res.sendFile('index.html', { root: 'dist/angular-startup/'});
 });
 
 app.listen(process.env.PORT || 8080);
