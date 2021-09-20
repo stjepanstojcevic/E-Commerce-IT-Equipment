@@ -16,6 +16,6 @@ const ProductSchema = new mongoose.Schema({
 });
 
 ProductSchema.methods.setImageUrl = async function () {
-  this.imageUrl = API_URI + ':'+ PORT +'/api/products/image/' + this._id;
+  this.imageUrl = API_URI + '/api/products/image/' + this._id;
 };
 mongoose.model("Product", ProductSchema, "products");
