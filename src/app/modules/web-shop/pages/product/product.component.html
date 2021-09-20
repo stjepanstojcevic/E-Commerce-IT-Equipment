@@ -1,0 +1,63 @@
+<div 
+  *ngIf="!loading"
+  class="container"
+  fxLayout="column">
+  <div *ngIf="(user$ | async)?.role == 'admin'" class="mb-3" fxLayout fxLayoutAlign="end center" fxLayoutGap="2%">
+    <button mat-raised-button color="primary" [routerLink]="['/dashboard/products', product._id]">Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteProduct()">Delete</button>
+  </div>
+  <h1><b>{{ product.title }}</b></h1>
+
+  <div fxLayout fxLayout.lt-sm="column" fxLayoutGap="2%">
+    <div fxFlex.gt-xs="50%">
+      <img 
+        class="product-image"
+        alt="Product placeholder"
+        [src]="product.imageUrl">
+    </div>
+    <div fxLayout="column" fxLayoutAlign="space-between end">
+      <div>
+        <h3 fxFlexAlign="end">ID: {{ product._id }}</h3>
+        <mat-divider></mat-divider>
+        <h3>{{ product.short }}</h3>
+        <p>{{ product.description }}</p>
+        <h2 class="text-primary"><b>{{ product.price }}$</b></h2>
+      </div>
+      
+      <div class="top-border py-2 w-100">
+        <button 
+          mat-raised-button 
+          color="primary"
+          [disabled]="!product.available"
+          (click)="addProduct()"
+        >Add to cart</button>
+      </div>
+    </div>
+  </div>
+  <br />
+
+  <!-- <div fxLayout fxLayoutGap="3%">
+    <div fxHide.lt-sm fxLayout="column" fxFlex="20%">
+      <h1>Category</h1>
+      <mat-nav-list *ngFor="let cat of (category$ | async)">
+        <a mat-list-item>{{ cat }}</a>
+      </mat-nav-list>
+    </div>
+
+    <mat-divider vertical></mat-divider>
+
+    <mat-tab-group>
+      <mat-tab label="Description">
+        {{ product.description }}
+      </mat-tab>
+      <mat-tab label="Comments">
+        Comments
+      </mat-tab>
+      <mat-tab *ngIf="product.spec" label="Spec">
+        {{ product.spec }}
+      </mat-tab>
+    </mat-tab-group>
+  </div> -->
+  
+
+</div>

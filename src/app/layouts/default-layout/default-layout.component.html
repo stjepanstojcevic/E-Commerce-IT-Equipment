@@ -1,0 +1,40 @@
+<div 
+  fxLayout="column"
+  [class.is-mobile]="mobileQuery.matches">
+
+  <!-- Navbar -->
+  <app-nav (sidenavToggled)="sidenavOpened=!sidenavOpened"></app-nav>
+
+  <!-- Sidenav container -->
+  <mat-sidenav-container>
+  
+    <!-- Sidenav -->
+    <mat-sidenav 
+      mode="over"
+      [opened]="sidenavOpened"
+      [ngClass]="mobileQuery.matches ? 'mobile-sidenav' : ''"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      
+      <mat-nav-list>
+        <!-- <a mat-list-item routerLink="/home" (click)="sidenavOpened=!sidenavOpened">Home</a> -->
+        <a mat-list-item routerLink="/shop" (click)="sidenavOpened=!sidenavOpened">Shop</a>
+        <a mat-list-item routerLink="/about" (click)="sidenavOpened=!sidenavOpened">About</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Content -->
+    <mat-sidenav-content fixedTopGap="56">
+      <div class="w-100 p-3" [ngClass.gt-sm]="'container'">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>
+  
+  <!-- Copyright 2021 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->

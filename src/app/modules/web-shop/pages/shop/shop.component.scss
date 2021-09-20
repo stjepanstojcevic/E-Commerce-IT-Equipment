@@ -1,0 +1,11 @@
+.card-gt-sm > mat-card {
+    width: 200px;
+}
+
+.side-right-border {
+    border-right: 1px rgba(128, 128, 128, 0.25) solid;
+}
+
+.content {
+    height: calc(100vh - calc(60px * 2));
+}

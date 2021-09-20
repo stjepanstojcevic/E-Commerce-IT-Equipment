@@ -1,0 +1,31 @@
+<div ngClass.gt-sm="container" fxLayoutGap="2%" fxLayoutAlign="center start" *ngIf="!empty; else shopEmpty">
+  <div fxHide.lt-sm fxLayout="column" fxFlex="20%" fxFlexAlign="start" class="side-right-border">
+    <h1>Categories</h1>
+    <mat-nav-list>
+      <a mat-list-item (click)="resetFilter()">All</a>
+    </mat-nav-list>
+    <mat-nav-list *ngFor="let category of (categories$ | async)">
+      <a mat-list-item (click)="filterByCategory(category)">{{ category }}</a>
+    </mat-nav-list>
+    
+  </div>
+  <div 
+    fxFlex="73%"
+    fxFlex.lt-sm="100%"
+    fxLayout="row wrap"
+    fxLayoutAlign="start"
+    fxLayoutGap="16px grid"
+    fxLayout.xs="column"
+    [ngClass.gt-sm]="'card-gt-sm'">
+    <div fxFlex.gt-xs="50%" fxFlex.gt-md="33%" *ngFor="let product of (products$ | async);">
+      <app-product-card [user]="(user$ | async)" [product]="product"></app-product-card>
+    </div>
+  </div>
+</div>
+
+<ng-template  #shopEmpty>
+  <div class="content" fxLayout="column" fxLayoutAlign="center center">
+    <h1>We're importing our products ...</h1>
+    <h1>Please, come back later.</h1>
+  </div>
+</ng-template>

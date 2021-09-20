@@ -1,0 +1,5 @@
+<div> 
+  <!-- <button mat-menu-item routerLink="/dashboard/account">Manage your Account</button> -->
+  <button *ngIf="(this.role$ | async) == 'admin'" routerLink="/dashboard/products" mat-menu-item>Add new product</button>
+  <button mat-menu-item color="primary" (click)="logout()">Logout</button>
+</div>

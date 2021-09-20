@@ -1,0 +1,24 @@
+.product-card-image {
+  height: 180px;
+  object-fit: scale-down;
+}
+
+.price{
+  font-size: 40px;
+  color: lightskyblue;
+  font-weight: 900;
+}
+
+p {
+  &.chip-available {
+    color: green;
+  }
+  
+  &.chip-disabled {
+    color: darkgray;
+  }
+}
+
+mat-card-title {
+  height: 80px;
+}

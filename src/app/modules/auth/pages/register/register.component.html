@@ -1,0 +1,59 @@
+<div fxLayout="column" fxLayoutAlign="center center" ngClass.lt-sm="pb-5">
+  <h1><b>Sign up</b></h1>
+  <h3>Create your eCommerce account</h3>
+  <div *ngIf="this.error" class="alert alert-danger mb-4" role="alert">
+    {{ this.error }}
+  </div>
+  <form (ngSubmit)="register()" [formGroup]="registerForm">
+    <div fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Firstname</mat-label>
+        <input matInput [placeholder]="'John'" formControlName="firstname">
+        <mat-error *ngIf="registerForm.hasError('required', 'firstname')">
+          Firstname is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Lastname</mat-label>
+        <input matInput [placeholder]="'Doe'" formControlName="lastname">
+        <mat-error *ngIf="registerForm.hasError('required', 'lastname')">
+          Lastname is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [placeholder]="'johndoe@mail.com'" formControlName="email">
+        <mat-error *ngIf="registerForm.hasError('required', 'email')">
+          Email is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [placeholder]="'*****'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="registerForm.hasError('required', 'password')">
+          Please enter your password
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [placeholder]="'*****'" formControlName="confirmPassword" [errorStateMatcher]="errorMatcher">
+        <mat-error *ngIf="registerForm.hasError('notSame')">
+          Passwords do not match
+        </mat-error>
+      </mat-form-field>
+      <mat-divider class="mb-3"></mat-divider>
+      <div fxLayoutAlign="space-between end">
+        <span class="mr-3">
+          <p>Already have an account?</p>
+          <a [routerLink]="['/account/login']">Sign in</a>
+        </span>
+        <button mat-flat-button color="primary" type="submit" type="submit" [disabled]="registerForm.invalid">
+          Sign up
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

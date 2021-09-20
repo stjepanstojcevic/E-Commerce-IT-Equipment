@@ -1,0 +1,34 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h1><b>Sign in</b></h1>
+  <h3>Use your eCommerce account</h3>
+  <div *ngIf="this.error" class="alert alert-danger mb-4" role="alert">
+    {{ this.error }}
+  </div>
+  <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <div fxLayout="column">
+      <mat-form-field class="" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput class="" [placeholder]="'Email'" formControlName="email" value="johndoe@mail.com">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [placeholder]="'Password'" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-divider class="mb-3"></mat-divider>
+      <div fxLayoue fxLayoutAlign="space-between end">
+        <div class="ml-1" fxLayout="column">
+          <mat-checkbox color="primary" formControlName="rememberMe">Remember me</mat-checkbox>
+          <a [routerLink]="['/account/register']">Create account</a>
+        </div>
+
+        <button mat-flat-button color="primary" type="submit" type="submit" [disabled]="loginForm.invalid">
+          Sign in
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+

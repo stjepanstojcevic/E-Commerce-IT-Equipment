@@ -1,0 +1,54 @@
+<mat-toolbar>
+  <div class="w-100" ngClass.gt-sm="container">
+    <div fxLayout fxLayoutAlign="space-between center" >
+
+      <!-- Menu button -->
+      <button fxHide.gt-xs mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- Brand and navigation -->
+      <div fxHide.lt-sm fxLayoutAlign="start center" fxLayoutGap="1%">
+        <h1 class="brand-title"><a routerLink="/shop/products">ECommerce</a></h1>
+        <button mat-button routerLink="/about">About</button>
+      </div>
+    
+      <div fxFlex fxLayoutAlign="end center">
+        <div 
+          fxLayout 
+          fxLayoutAlign="center center"
+          *ngIf="(this.isAuthenticated$ | async)">
+          
+          <!-- Shopping Cart -->
+          <button
+            mat-icon-button 
+            [disableRipple]="true"
+            routerLink="/shop/cart">
+            <mat-icon
+              [matBadge]="shoppingCartItemsNumber"
+              matBadgeSize="small"
+              matBadgePosition="above after"
+              matBadgeColor="accent">
+                shopping_cart
+            </mat-icon>
+          </button>
+          
+          <button *ngIf="!loading" mat-icon-button class="avatar ml-2" [matMenuTriggerFor]="accountMenu">
+            <img mat-card-avatar class="avatar-img" 
+            [src]="(this.user$ | async)?.gravatarUrl">
+          </button>
+        </div>
+          
+        <button *ngIf="!(this.isAuthenticated$ | async)" 
+              mat-raised-button 
+              color="primary"
+              class="ml-3" 
+              routerLink="/account/login">Login</button>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-menu #accountMenu="matMenu" xPosition="before" class="mt-2">
+  <app-account-menu></app-account-menu>
+</mat-menu>

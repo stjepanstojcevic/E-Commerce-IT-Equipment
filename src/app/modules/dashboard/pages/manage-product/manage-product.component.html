@@ -1,0 +1,87 @@
+<div fxLayout fxLayoutAlign="space-between center">
+  <h4 *ngIf="(product$ | async)?._id">Product ID: {{ (product$ | async)?._id }}</h4>
+  <div *ngIf="editMode" fxLayout fxLayoutAlign="end start" fxLayoutGap="2%" class="mb-2">
+    <button mat-raised-button color="warn" (click)="deleteProduct()">Delete</button>
+  </div>
+</div>
+<form (ngSubmit)="this.createOrUpdateProduct()" [formGroup]="productForm">
+  <div fxLayout="column">
+    <div fxLayout fxLayout.lt-sm="column-reverse" fxLayoutAlign="space-between start">
+      <mat-form-field fxFlex.xs="100%" fxFlex.gt-xs="65%" appearance="standard" class="title-form-field">
+        <mat-label>Title</mat-label>
+        <input matInput [placeholder]="'Product X'" formControlName="title"> <!-- (product$ | async)? -->
+        <mat-error *ngIf="productForm.hasError('required', 'title')">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout fxLayout.lt-sm="column" fxLayoutGap="2%">
+      <div fxFlex.gt-xs="65%" class="product-image">
+        <img 
+          class="product-image"
+          [src]="currentImage"
+          alt="Product placeholder">
+      </div>
+      
+      <div fxFlex fxLayout="column">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="productImage" name="productImage"
+          (change)="onFileSelect($event)" #UploadImageInput>
+          <label class="custom-file-label" for="productImage">{{ image?.name ||'Choose File'}}</label>
+        </div>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Price</mat-label>
+          <input matInput [placeholder]="'349.99'" formControlName="price">
+          <mat-error *ngIf="productForm.hasError('required', 'price')">
+            Price is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Category</mat-label>
+          <input 
+            matInput
+            type="text"
+            placeholder="Category"
+            formControlName="category"
+            [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>        
+        <mat-slide-toggle 
+          color="primary"          
+          labelPosition="before" 
+          formControlName="available"
+        >Available</mat-slide-toggle>
+        <mat-form-field appearance="standard">
+          <mat-label>Short Description</mat-label>
+          <input 
+            matInput 
+            formControlName="short" 
+            [placeholder]="'This is a brand new PC made by Intel inc. This compouter is grate choice for home and gaming PC.'">
+          <mat-error *ngIf="productForm.hasError('required', 'short')">
+            Short description is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>Description</mat-label>
+          <textarea 
+            matInput 
+            [rows]="7"
+            formControlName="description" 
+            [placeholder]="'This is a brand new PC made by Intel inc. This compouter is grate choice for home and gaming PC.'"></textarea>
+        </mat-form-field>
+        <button *ngIf="!editMode;" color="primary" mat-raised-button type="submit" [disabled]="productForm.invalid">Create</button>
+        <button *ngIf="editMode;" color="primary" mat-raised-button type="submit" [disabled]="productForm.invalid">Update</button>
+      </div>
+    </div>
+
+    <div fxLayout>
+
+    </div>
+  </div>
+</form>

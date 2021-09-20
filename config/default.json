@@ -1,0 +1,11 @@
+{
+  "AppSettings": {
+    "port": 3001
+  },
+  "ConnectionStrings": {
+    "mongoDb": "mongodb://server:27017/ecommerce"
+  },
+  "JwtSettings": {
+    "secret": "very-strong-secret:)"
+  }
+}
