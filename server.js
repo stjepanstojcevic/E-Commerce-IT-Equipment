@@ -23,11 +23,11 @@ app.use('/api', require('./routes'));
 
 
 // Start hosting
-app.use(express.static(path.join(__dirname, '../client/dist/angular-startup')));
+app.use(express.static('./dist/angular-startup'));
 
 
 app.get('/*', (req, res) => {
-  res.sendFile('index.html', { root: path.join(__dirname, '..//client/dist/angular-startup')});
+  res.sendFile('index.html', { root: path.join(__dirname, './dist/angular-startup')});
 });
 
 app.listen(process.env.PORT || 8080);

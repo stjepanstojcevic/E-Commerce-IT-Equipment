@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const { API_URI, DEFAULT_IMAGE_URL } = process.env;
+const { API_URI, DEFAULT_IMAGE_URL, PORT } = process.env;
 
 const ProductSchema = new mongoose.Schema({
   title: { type: String, required: true, },
@@ -16,6 +16,6 @@ const ProductSchema = new mongoose.Schema({
 });
 
 ProductSchema.methods.setImageUrl = async function () {
-  this.imageUrl = API_URI + '/api/products/image/' + this._id;
+  this.imageUrl = API_URI + ':'+ PORT +'/api/products/image/' + this._id;
 };
 mongoose.model("Product", ProductSchema, "products");
